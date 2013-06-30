@@ -23,6 +23,7 @@ $query_productos_mail = mysql_query($sql_productos_mail, Conectar::con()) or die
 				conexion.onreadystatechange=function(){
 					if(conexion.readyState==4 && conexion.status==200){
 						document.getElementById("midiv").innerHTML=conexion.responseText;
+						document.getElementById("btn_enviar").style.display="inline";
 					}
 				}
 				conexion.open("GET","contenido.php?id="+int,true);
@@ -59,12 +60,18 @@ $query_productos_mail = mysql_query($sql_productos_mail, Conectar::con()) or die
 				background-color: #72A603;
 			}
 			.table-hover tbody tr:hover > td, .table-hover tbody tr:hover > th {
-				background-color: #C9F235;
+				background-color: #ABD650;
 				color: #FFFFFF;
 			
 			}
 			.table-striped tbody > tr:nth-child(2n+1) > td, .table-striped tbody > tr:nth-child(2n+1) > th {
 				color: #FFFFFF;
+			}
+			.table td {
+			  background-color: #B8EF43;
+			}
+			.table th {
+			  background-color: #FFFFFF;
 			}
 		</style>	
 	</head>
@@ -76,6 +83,7 @@ $query_productos_mail = mysql_query($sql_productos_mail, Conectar::con()) or die
 	        			<thead>
 							<tr>
 								<th>#</th>
+								<th>Estado</th>
 								<th>Nombre remitente</th>
 								<th>Mail remitente</th>
 								<th>Nombre destinatario</th>
@@ -87,6 +95,13 @@ $query_productos_mail = mysql_query($sql_productos_mail, Conectar::con()) or die
 						<?php while ($fila=mysql_fetch_array($query_productos_mail)) : ?>
 							<tr>
 								<td><?php echo ++$i; ?></td>
+								<td style="text-align: center;">
+									<?php if ($fila["estado"]== 0) : ?>
+									<i class="icon-share icon-white"></i>
+									<?php else : ?>
+									<i class="icon-check icon-white"></i>
+									<?php endif; ?>
+								</td>
 								<td><?php echo $fila["nombre_remitente"]; ?></td>
 								<td><?php echo $fila["mail_remitente"]; ?></td>
 								<td><?php echo $fila["nombre_destinatario"]; ?></td>

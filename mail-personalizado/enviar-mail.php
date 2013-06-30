@@ -33,6 +33,9 @@ $mail->MsgHTML($body);
 if(!$mail->Send()) {
 	echo "Mailer Error: " . $mail->ErrorInfo;
 } else {
+	//UPDATE `litarcl_bdlitar`.`mails_personalizados` SET `estado` = '1' WHERE `mails_personalizados`.`id` =87;
+	$sql_estado = "UPDATE mails_personalizados SET estado=1 WHERE id=".$id;
+	mysql_query($sql_estado,Conectar::con()) or die("no se pudo ejecutar query estado");
 	echo "El mail se ha enviado correctamente al cliente.";
 }
 ?>
