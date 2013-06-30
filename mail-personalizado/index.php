@@ -1,5 +1,13 @@
 <?php 
 include_once '../../lib/class.php';
+if ($_SESSION["id_perfil"]!=3) {
+	echo '
+			<script type="text/javascript">
+				alert("No tiene permisos para acceder");
+				location.href="http://www.litar.cl";
+			</script>
+			' ;	
+}
 $sql_productos_mail = "SELECT * FROM mails_personalizados;";
 $query_productos_mail = mysql_query($sql_productos_mail, Conectar::con()) or die("No se realizo la consulta");
 ?>
